@@ -1,7 +1,7 @@
 package com.example.demo.SortingAlgo.Implementation;
 
-import SortingAlgo.Implementation.SortingAlgo.Engine;
-import SortingAlgo.Implementation.Wrapper.InstrumentedList;
+import com.example.demo.SortingAlgo.Engine;
+import com.example.demo.Wrapper.InstrumentedList;
 
 import java.util.List;
 
