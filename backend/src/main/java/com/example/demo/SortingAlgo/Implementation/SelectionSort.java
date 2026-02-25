@@ -1,0 +1,28 @@
+package com.example.demo.SortingAlgo.Implementation;
+
+import SortingAlgo.Implementation.SortingAlgo.Engine;
+import SortingAlgo.Implementation.Wrapper.InstrumentedList;
+
+import java.util.List;
+
+public class SelectionSort implements Engine {
+    public List<Integer> Sorted(InstrumentedList<Integer> numbers){
+        for (int i = 0; i < numbers.size()-1; i++) {
+            int min = numbers.get(i);
+            int idx = i;
+            for (int j = i + 1; j < numbers.size(); j++) {
+                if (numbers.compareValue(min,j) >0) {
+                    min = numbers.get(j);
+                    idx = j;
+                }
+            }
+            if (idx != i) {
+                int temp = numbers.get(i);
+                numbers.set(i, min);
+                numbers.set(idx, temp);
+            }
+        }
+        return numbers;
+        }
+    }
+
