@@ -10,7 +10,7 @@ import java.util.List;
 public class respond {
     private Double totalComparisons;
     private Double totalInterchanges;
-
+    private int TotalSteps;
     private Double AverageRuntime;
     private Double minRuntime;
     private Double maxRuntime;

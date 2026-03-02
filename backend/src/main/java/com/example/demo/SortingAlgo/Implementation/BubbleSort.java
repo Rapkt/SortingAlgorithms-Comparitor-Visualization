@@ -12,9 +12,10 @@ public class BubbleSort implements Engine {
         for (int i=0;i<numbers.size();i++){
             for (int j = 0; j < numbers.size()-i-1; j++) {
                 if(numbers.compare(j,j+1) >0){
-                    int temp = numbers.get(j+1);
+                    numbers.swap(i,j);
+                    /*int temp = numbers.get(j+1);
                     numbers.set(j+1,numbers.get(j));
-                    numbers.set(j,temp);
+                    numbers.set(j,temp);*/
                 }
             }
         }

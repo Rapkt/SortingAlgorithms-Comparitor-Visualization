@@ -18,9 +18,7 @@ public class SelectionSort implements Engine {
                 }
             }
             if (idx != i) {
-                int temp = numbers.get(i);
-                numbers.set(i, min);
-                numbers.set(idx, temp);
+                numbers.swap(i,min);
             }
         }
         return numbers;

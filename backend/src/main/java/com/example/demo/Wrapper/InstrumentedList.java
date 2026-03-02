@@ -10,6 +10,8 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     private final List<T> internalList;
     private long comparisons=0;
     private long interchanges=0;
+    private int i;
+    private int j;
     private List<steps> sortingSteps = new ArrayList<>();
     public InstrumentedList(List<T> list){
         this.internalList = new ArrayList<>(list);
@@ -21,18 +23,38 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     }
     @Override
     public T set(int index, T element) {
+        return internalList.set(index, element);
+    }
+    public void setWithCapture(int index, T element) {
+        internalList.set(index, element);
         interchanges++;
-        T old = internalList.set(index,element);
+        if(internalList.size() <= 100) {
+            captureStep();
+        }
+    }
+    public void swap(int idxA,int idxB){
+        if(idxA == idxB) return;
+
+        T temp = internalList.get(idxA);
+        internalList.set(idxA, internalList.get(idxB));
+        internalList.set(idxB, temp);
+        interchanges++;
+        this.i = idxA;
+        this.j = idxB;
+
         if(internalList.size()<=100){
             captureStep();
         }
-        return old;
+
     }
     private void captureStep(){
         sortingSteps.add(new steps(
                 new ArrayList<>((List<Integer>) internalList),
                 this.comparisons,
-                this.interchanges
+                this.interchanges,
+                this.i,
+                this.j
+
         ));
     }
     public List<steps> getSortingSteps(){

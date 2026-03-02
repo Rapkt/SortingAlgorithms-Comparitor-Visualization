@@ -13,6 +13,7 @@ import java.util.List;
 public class Benchmark {
 
     public respond runBenchMark(String algo,String arrayType,int size,int runs){
+
         GenerateData datagen = new GenerateData();
         List<Double> runtimes = new ArrayList<>();
 
@@ -43,7 +44,27 @@ public class Benchmark {
         res.setTotalComparisons((double) finalComparisons);
         res.setTotalInterchanges((double) finalinterchanges);
         res.setSteps(finalSteps);
+        res.setTotalSteps(finalSteps.size());
         return res;
+    }
+    public respond BenchWithArray(List<Integer> arr,String algo,String arrayType,int size ){
+        long finalComparisons=0;
+        long finalinterchanges=0;
+        List<steps> finalSteps = new ArrayList<>();
+
+        InstrumentedList<Integer> list = new InstrumentedList<>(arr);
+        Engine engine = getEngine(algo);
+        long startTime = System.nanoTime();
+        engine.Sorted(list);
+        long endTime = System.nanoTime();
+
+        double duration = (endTime- startTime)/1_000_000.0;
+
+        finalComparisons = list.getComparisons();
+        finalinterchanges = list.getInterchanges();
+        finalSteps = list.getSortingSteps();
+        respond res = new respond();
+
     }
         private Engine getEngine(String name){
             switch (name.toLowerCase()) {
