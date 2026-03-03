@@ -1,0 +1,21 @@
+<div class="card-wrapper"
+     [class.type-A]="selectionType === 'A'"
+     [class.type-B]="selectionType === 'B'"
+     (click)="onSelect()">
+
+
+  <div class="card-content">
+    <div class="image-container">
+      <img [src]="imageUrl" [alt]="name" class="algo-image">
+    </div>
+
+    <div class="info-container">
+      <h3 class="algo-name">{{ name }}</h3>
+      <p class="algo-description">{{ description }}</p>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <span class="complexity-tag">{{ complexity }}</span>
+  </div>
+</div>

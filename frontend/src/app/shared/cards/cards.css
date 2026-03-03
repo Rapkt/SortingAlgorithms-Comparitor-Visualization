@@ -1,0 +1,120 @@
+:host {
+  display: block;
+  width: 250px;
+  height: 350px;/* Ensures the component respects dimensions */
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  border: 3px solid transparent;
+  transform: perspective(1000px) rotateY(5deg);
+}
+.card-wrapper.type-A {
+  border-color: #3498db !important; /* Blue */
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+  transform: translateY(-20px) scale(1.02);
+}
+.card-wrapper.type-B {
+  border-color: #e74c3c !important; /* Red */
+  box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+  transform: translateY(-20px) scale(1.02);
+}
+.card-wrapper:hover {
+  transform: perspective(1000px) rotateY(0deg) translateY(-15px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card-wrapper.selected {
+  transform:translateY(-20px) scale(1.08);
+  border-color: #3498db;
+  box-shadow: 0 15px 30px rgba(52,152,219,0.3);
+  z-index: 10;
+  background: #f0f7ff;
+}
+.card-wrapper.selected::after {
+  content: '';
+  position: absolute;
+  top: -5px; left: -5px; right: -5px; bottom: -5px;
+  border-radius: 25px;
+  border: 2px solid rgba(52, 152, 219, 0.5);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.05); opacity: 0; }
+}
+.image-container {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+
+.algo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card-wrapper:hover .algo-image {
+  transform: scale(1.1);
+}
+
+.info-container {
+  padding: 20px;
+  text-align: left;
+}
+
+.algo-name {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+}
+
+.algo-description {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  line-height: 1.4;
+  height: 40px;
+  overflow: hidden;
+}
+
+.card-footer {
+  padding: 10px 20px 20px;
+  text-align: left;
+}
+
+.complexity-tag {
+  background: #ecf0f1;
+  color: #34495e;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.selection-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #3498db;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

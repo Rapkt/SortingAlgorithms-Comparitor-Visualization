@@ -15,12 +15,17 @@ public class steps{
     private long interchanges;
     private int i;
     private int j;
+    private int startIdx;
+    private int level;
 
-    public steps(List<Integer> currentList, long comparisons, long interchanges,int j, int i) {
+    public steps(List<Integer> currentList, long comparisons, long interchanges,int j, int i
+    ,int startIdx,int level) {
         this.currentList = currentList;
         this.comparisons = comparisons;
         this.interchanges = interchanges;
         this.j = j;
         this.i = i;
+        this.startIdx=startIdx;
+        this.level=level;
     }
 }

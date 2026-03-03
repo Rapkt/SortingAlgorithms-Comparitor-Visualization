@@ -1,6 +1,8 @@
 package com.example.demo.Control;
 
 
+import com.example.demo.Dto.CompareInput;
+import com.example.demo.Dto.CompareResponed;
 import com.example.demo.Dto.respond;
 import com.example.demo.Dto.steps;
 import com.example.demo.Service.Benchmark;
@@ -12,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sort")
-@CrossOrigin("http://localhost:8080")
+@RequestMapping("/api")
+@CrossOrigin("http://localhost:4200")
 public class SortingController {
 private final Benchmark benchmark;
 private final Pagination pagination;
@@ -34,5 +36,14 @@ public respond start(@RequestParam String algo,@RequestParam String type,@Reques
 @GetMapping("/steps")
     public List<steps> Steps(@RequestParam int page,@RequestParam int end){
     return pagination.getPagination(allsteps,page,end);
+}
+@PostMapping("/benchmark")
+    public CompareResponed compare(@RequestBody CompareInput input){
+    respond resultA = benchmark.runBenchMark(input.getAlgoIdA(), input.getType(), input.getSize(),input.getIterations());
+    respond resultB = benchmark.runBenchMark(input.getAlgoIdB(), input.getType(), input.getSize(),input.getIterations());
+    CompareResponed res = new CompareResponed();
+    res.setResultsA(resultA);
+    res.setResultsB(resultB);
+    return res;
 }
 }

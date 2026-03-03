@@ -43,11 +43,10 @@ public class Benchmark {
         res.setMaxRuntime(runtimes.stream().mapToDouble(Double::doubleValue).max().orElse(0.0));
         res.setTotalComparisons((double) finalComparisons);
         res.setTotalInterchanges((double) finalinterchanges);
-        res.setSteps(finalSteps);
         res.setTotalSteps(finalSteps.size());
         return res;
     }
-    public respond BenchWithArray(List<Integer> arr,String algo,String arrayType,int size ){
+   /* public respond BenchWithArray(List<Integer> arr,String algo,String arrayType,int size ){
         long finalComparisons=0;
         long finalinterchanges=0;
         List<steps> finalSteps = new ArrayList<>();
@@ -65,7 +64,7 @@ public class Benchmark {
         finalSteps = list.getSortingSteps();
         respond res = new respond();
 
-    }
+    }*/
         private Engine getEngine(String name){
             switch (name.toLowerCase()) {
                 case "bubble":

@@ -1,5 +1,6 @@
 package com.example.demo.Dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Setter
 @Getter
+@Data
 public class respond {
     private Double totalComparisons;
     private Double totalInterchanges;

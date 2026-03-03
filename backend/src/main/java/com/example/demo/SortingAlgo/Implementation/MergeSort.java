@@ -11,17 +11,28 @@ public class MergeSort implements Engine {
 
     @Override
     public List<Integer> Sorted(InstrumentedList<Integer> numbers) {
-        mergeSort(numbers);
+        mergeSort(numbers,0,0);
         return numbers;
     }
-    private void mergeSort(InstrumentedList<Integer> numbers){
+    private void mergeSort(InstrumentedList<Integer> numbers,int level,int offset){
         int length = numbers.size();
         if(length <=1) return;
+
         int middle = length/2;
-        InstrumentedList<Integer> Left = new InstrumentedList<>( new ArrayList<>(numbers.subList(0,middle)));
-        InstrumentedList<Integer> Right = new InstrumentedList<>(new ArrayList<>(numbers.subList(middle,length)));
-        mergeSort(Left);
-        mergeSort(Right);
+
+        InstrumentedList<Integer> Left = new InstrumentedList<>(
+                new ArrayList<>(numbers.subList(0,middle)),
+                numbers.getSortingSteps(),
+                offset,
+                level+1);
+        InstrumentedList<Integer> Right = new InstrumentedList<>(
+                new ArrayList<>(numbers.subList(middle,length)),
+                numbers.getSortingSteps(),
+                offset+middle,
+                level+1);
+
+        mergeSort(Left,level+1,offset);
+        mergeSort(Right,level+1,offset+middle);
         merge(Left,Right,numbers);
 
     }
@@ -31,19 +42,19 @@ public class MergeSort implements Engine {
         for(int i=0;i <parent.size();i++){
             if(rightIdx < Right.size()  && leftIdx < Left.size()){
                 if(parent.compareValues(Left.get(leftIdx), Right.get(rightIdx)) <0){
-                    parent.set(i,Left.get(leftIdx));
+                    parent.setWithCapture(i,Left.get(leftIdx));
                     leftIdx++;
                 }
                 else{
-                    parent.set(i,Right.get(rightIdx));
+                    parent.setWithCapture(i,Right.get(rightIdx));
                     rightIdx++;
                 }
             } else if (rightIdx < Right.size()) {
-                parent.set(i,Right.get(rightIdx));
+                parent.setWithCapture(i,Right.get(rightIdx));
                 rightIdx++;
             }
             else{
-                parent.set(i,Left.get(leftIdx));
+                parent.setWithCapture(i,Left.get(leftIdx));
                 leftIdx++;
             }
         }

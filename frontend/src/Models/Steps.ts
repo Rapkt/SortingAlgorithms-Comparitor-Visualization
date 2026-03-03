@@ -2,8 +2,8 @@ export interface Steps{
   currentList:number[];
   comparisons:number;
   interchanges:number;
-  currentComparisonIdx:{
-    i:number;
-    j:number;
-  };
+  i:number;
+  j:number;
+  startIdx:number;
+  level:number;
 }

@@ -12,11 +12,22 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     private long interchanges=0;
     private int i;
     private int j;
+    private int level;
+    private int startIdx;
+
     private List<steps> sortingSteps = new ArrayList<>();
     public InstrumentedList(List<T> list){
+        this(list, new ArrayList<>(),0,0);
+    }
+    public InstrumentedList(List<T> list, List<steps> sharedHistory,int startIdx,int level){
         this.internalList = new ArrayList<>(list);
+        this.sortingSteps = sharedHistory;
+        this.startIdx=startIdx;
+        this.level=level;
         captureStep();
     }
+
+
     @Override
     public T get(int index){
         return internalList.get(index);
@@ -28,6 +39,8 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     public void setWithCapture(int index, T element) {
         internalList.set(index, element);
         interchanges++;
+        this.i = index;
+        this.j =-1;
         if(internalList.size() <= 100) {
             captureStep();
         }
@@ -53,7 +66,9 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
                 this.comparisons,
                 this.interchanges,
                 this.i,
-                this.j
+                this.j,
+                this.startIdx,
+                this.level
 
         ));
     }
@@ -79,4 +94,7 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     }
     public long getComparisons() { return comparisons; }
     public long getInterchanges() { return interchanges; }
+    public void incrementComaprisons(){
+        this.comparisons++;
+    }
 }

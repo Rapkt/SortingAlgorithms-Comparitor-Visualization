@@ -1,0 +1,99 @@
+<div class="lab-container">
+  <div class="header">
+    <button class="back-btn btn-close" routerLink="/home" >Home</button>
+    <div style="display: flex; flex-direction: column">
+    <h1>Algorithm Compareter</h1>
+    <p>Select two algorithms compare their efficiency.</p>
+    </div>
+  </div>
+
+  <div class="arena">
+    <div class="slot A" [class.filled]="selectedAlgoA">
+      @if(selectedAlgoA == null){
+        <span class="slot-label">Algorithm A</span>
+      }
+      <h2 *ngIf="selectedAlgoA">{{selectedAlgoA.name}}</h2>
+    </div>
+
+    <div class="vs-circle">VS</div>
+
+    <div class="slot B" [class.filled]="selectedAlgoB">
+      @if(selectedAlgoB == null){
+        <span class="slot-label">Algorithm B</span>
+      }
+      <h2 *ngIf="selectedAlgoB">{{selectedAlgoB.name}}</h2>
+    </div>
+  </div>
+
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <app-cards
+        *ngFor="let algo of algorithmList; let i = index"
+        [name]="algo.name"
+        [imageUrl]="algo.imageUrl"
+        [description]="algo.description"
+        [isSelected]="isAlgoSelected(algo.id)"
+        [selectionType]="getSelectionType(algo.id)"
+        [complexity]="algo.complexity"
+        (selected)="handleSelect(algo)"
+        [ngStyle]="getCardStyle(i)"
+        class="carousel-item">
+      </app-cards>
+    </div>
+  </div>
+
+  <div class="controls-panel" *ngIf="selectedAlgoA && selectedAlgoB">
+    <div class="inputs">
+      <div class="field">
+        <label>Array Size</label>
+        <input type="number" min="10" [(ngModel)]="arraySize">
+      </div>
+      <div class="field">
+        <label>Runs</label>
+        <input type="number" min="3" [(ngModel)]="iterations">
+      </div>
+      <div class="field">
+        <label>Array Type</label>
+        <select [(ngModel)]="arrayType" class="styled-select">
+          <option value="Random">Random</option>
+          <option value="Sorted">Sorted</option>
+          <option value="Inverted">Reversed Sorted</option>
+        </select>
+      </div>
+    </div>
+    <button class="run-btn" [class.is-loading]="isLoading" (click)="startBenchMark()">{{isLoading? 'Analyzing...':'Run Benchmark'}}</button>
+  </div>
+
+  <div class="res-wrapper" [class.active] = 'ShowResults'>
+    <div class="results-card">
+      <button class="btn-close" (click)="ShowResults=false" >×</button>
+      <div class="results-grid">
+        <section class="data-section left-section">
+          <h1 class="algo-title blue-text">{{selectedAlgoA?.name}}</h1>
+          <div class="value-row"><h2>{{resultsA?.totalComparisons | number}}</h2></div>
+          <div class="value-row"><h2>{{resultsA?.totalInterchanges | number}}</h2></div>
+          <div class="value-row"><h2>{{resultsA?.AverageRuntime | number:'1.2-2'}} ms</h2></div>
+          <div class="value-row"><h2>{{resultsA?.minRuntime | number:'1.2-2'}} ms</h2></div>
+          <div class="value-row"><h2>{{resultsA?.maxRuntime | number:'1.2-2'}} ms</h2></div>
+        </section>
+        <div class="labels-column">
+          <h1 class="algo-title">Algorithms</h1>
+          <div class="label-row"><h2>Comparisons</h2></div>
+          <div class="label-row"><h2>Interchanges</h2></div>
+          <div class="label-row"><h2>Avg Runtime</h2></div>
+          <div class="label-row"><h2>Min Runtime</h2></div>
+          <div class="label-row"><h2>Max Runtime</h2></div>
+        </div>
+
+        <section class="data-section right-section">
+          <h1 class="algo-title red-text">{{selectedAlgoB?.name}}</h1>
+          <div class="value-row"><h2>{{resultsB?.totalComparisons | number}}</h2></div>
+          <div class="value-row"><h2>{{resultsB?.totalInterchanges | number}}</h2></div>
+          <div class="value-row"><h2>{{resultsB?.AverageRuntime | number:'1.2-2'}} ms</h2></div>
+          <div class="value-row"><h2>{{resultsB?.minRuntime | number:'1.2-2'}} ms</h2></div>
+          <div class="value-row"><h2>{{resultsB?.maxRuntime | number:'1.2-2'}} ms</h2></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
