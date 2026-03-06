@@ -246,7 +246,8 @@ export class Vis implements OnInit, AfterViewInit {
         const content = reader.result as string;
         const numbers = content
           .trim()
-          .split(/\s+/)
+          .split(/,/)
+          .map((s) => s.trim())
           .map(Number)
           .filter((n) => !isNaN(n));
 
