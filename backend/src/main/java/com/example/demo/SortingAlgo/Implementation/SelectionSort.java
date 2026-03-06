@@ -11,7 +11,7 @@ public class SelectionSort implements Engine {
         for (int i = 0; i < numbers.size()-1; i++) {
             int idx = i;
             for (int j = i + 1; j < numbers.size(); j++) {
-                if (numbers.compareValue(j,idx) <0) {
+                if (numbers.compare(j,idx) <0) {
                     idx = j;
                 }
             }

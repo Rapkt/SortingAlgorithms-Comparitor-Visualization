@@ -59,11 +59,35 @@ public void startTheather(@RequestParam String algoId){
 }
 @PostMapping("/benchmark")
     public CompareResponed compare(@RequestBody CompareInput input){
-    respond resultA = benchmark.runBenchMark(input.getAlgoIdA(), input.getType(), input.getSize(),input.getIterations());
-    respond resultB = benchmark.runBenchMark(input.getAlgoIdB(), input.getType(), input.getSize(),input.getIterations());
-    CompareResponed res = new CompareResponed();
-    res.setResultsA(resultA);
-    res.setResultsB(resultB);
+    List<respond> resA = new ArrayList<>();
+    List<respond> resB = new ArrayList<>();
+    for(int i =0;i < input.getIterations();i++){
+        List<Integer> arr = generateData.generate(input.getType(), input.getSize());
+        List<Integer> arr2 = new ArrayList<>(arr);
+        resA.add(benchmark.SortWithArr(arr, input.getAlgoIdA()));
+        resB.add(benchmark.SortWithArr(arr2, input.getAlgoIdB()));
+    }
+   CompareResponed res = new CompareResponed();
+    res.setResultsA(aggergate(resA));
+    res.setResultsB(aggergate(resB));
     return res;
+}
+private respond aggergate(List<respond> results){
+    respond report = new respond();
+
+    double avgTime = results.stream().mapToDouble(respond::getAverageRuntime).average().orElse(0.0);
+    double minTime = results.stream().mapToDouble(respond::getMinRuntime).min().orElse(0.0);
+    double maxTime = results.stream().mapToDouble(respond::getMaxRuntime).max().orElse(0.0);
+
+    double avgComp = results.stream().mapToDouble(respond::getTotalComparisons).average().orElse(0.0);
+    double avgInter = results.stream().mapToDouble(respond::getTotalInterchanges).average().orElse(0.0);
+
+    report.setAverageRuntime(avgTime);
+    report.setMinRuntime(minTime);
+    report.setMaxRuntime(maxTime);
+    report.setTotalComparisons(avgComp);
+    report.setTotalInterchanges(avgInter);
+
+    return report;
 }
 }

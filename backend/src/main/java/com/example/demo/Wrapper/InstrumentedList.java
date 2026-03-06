@@ -34,6 +34,7 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     }
     @Override
     public T set(int index, T element) {
+        this.interchanges++;
         if(internalList.size()<=100){
             internalList.set(index,element);
             captureStep();

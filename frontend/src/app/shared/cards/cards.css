@@ -34,8 +34,6 @@
 
 .card-wrapper.selected {
   transform:translateY(-20px) scale(1.02);
-  border-color: #3498db;
-  box-shadow: 0 15px 30px rgba(52,152,219,0.3);
   z-index: 10;
   background: #f0f7ff;
 }
