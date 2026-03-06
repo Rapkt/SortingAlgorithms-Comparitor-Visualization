@@ -2,7 +2,7 @@
 
 A **full-stack, high-fidelity system** designed to **visualize, benchmark, and statistically analyze six fundamental sorting algorithms**.
 
-Developed on **Arch Linux**, this project bridges the gap between **theoretical Big-O complexity** and **real-world hardware performance** through interactive visualization and scientific benchmarking.
+<img width="2840" height="1531" alt="Screenshot 2026-03-06 192124" src="https://github.com/user-attachments/assets/b20bc1e3-5f32-4558-8140-311ff08e072c" />
 
 ---
 
@@ -147,8 +147,5 @@ These results highlight the difference between **theoretical complexity** and **
 * Demonstrate **full-stack integration between visualization, backend computation, and data science**
 
 ---
-<img width="2840" height="1531" alt="Screenshot 2026-03-06 192124" src="https://github.com/user-attachments/assets/b20bc1e3-5f32-4558-8140-311ff08e072c" />
-
-<img width="1702" height="1127" alt="Screenshot 2026-03-06 193032" src="https://github.com/user-attachments/assets/a93ba62a-555e-41f2-a91b-9b4b85b83054" />
 
 
