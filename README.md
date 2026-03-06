@@ -48,7 +48,6 @@ Supports **multi-iteration batch testing** and calculates:
 * Minimum runtime
 * Maximum runtime
 
-<img width="1221" height="583" alt="Screenshot 2026-03-06 195018" src="https://github.com/user-attachments/assets/37b5cf29-0286-4725-a1fe-d175dd1b2fae" />
 
 
 ## 📄 State Pagination
@@ -120,7 +119,8 @@ This will:
 * Generate a high-resolution graph:
 
 ```
-sorting_benchmark.png<img width="845" height="529" alt="output" src="https://github.com/user-attachments/assets/34f5ccfa-4565-40e8-a4dd-d7a5710a1262" />
+<img width="845" height="529" alt="output" src="https://github.com/user-attachments/assets/3de6620c-785a-40cf-8655-b908372ea18d" />
+
 
 ```
 
@@ -148,4 +148,7 @@ These results highlight the difference between **theoretical complexity** and **
 
 ---
 <img width="2840" height="1531" alt="Screenshot 2026-03-06 192124" src="https://github.com/user-attachments/assets/b20bc1e3-5f32-4558-8140-311ff08e072c" />
+
+<img width="1702" height="1127" alt="Screenshot 2026-03-06 193032" src="https://github.com/user-attachments/assets/a93ba62a-555e-41f2-a91b-9b4b85b83054" />
+
 
