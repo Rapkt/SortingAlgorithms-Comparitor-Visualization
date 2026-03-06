@@ -2,7 +2,8 @@
 
 A **full-stack, high-fidelity system** designed to **visualize, benchmark, and statistically analyze six fundamental sorting algorithms**.
 
-<img width="2840" height="1531" alt="Screenshot 2026-03-06 192124" src="https://github.com/user-attachments/assets/b20bc1e3-5f32-4558-8140-311ff08e072c" />
+<img width="1580" height="1250" alt="Screenshot 2026-03-06 191646" src="https://github.com/user-attachments/assets/2eafba78-d438-463e-9821-372fc1f7f6f2" />
+
 
 ---
 
