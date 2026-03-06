@@ -1,4 +1,5 @@
 <div class="card-wrapper"
+     [class.selected]="isSelected"
      [class.type-A]="selectionType === 'A'"
      [class.type-B]="selectionType === 'B'"
      (click)="onSelect()">

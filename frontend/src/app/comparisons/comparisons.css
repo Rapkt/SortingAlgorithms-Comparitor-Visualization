@@ -141,7 +141,6 @@ position: relative;
   transition: opacity 0.3s;
 }
 
-/* This is the magic fix */
 .res-wrapper.active {
   display: flex !important;
 }

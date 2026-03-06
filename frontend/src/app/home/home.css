@@ -6,33 +6,27 @@
   justify-content: center;
   align-items: center;
   background: #fdfdfd;
+  flex-direction: column;
 }
-.container{
+header{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #f9f9f9;
-  box-shadow: 1px 1px 10px #000;
-  border-radius: 15px;
-  padding: 40px;
+  position: fixed;
+  top:100px;
 }
 .subtitle {
   color: #7f8c8d;
   font-size: 1.2rem;
   margin-top: -10px;
 }
-.author {
-  font-style: italic;
-  color: #95a5a6;
-  margin-bottom: 40px; }
 
 .card-container {
   display: flex;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-  margin-bottom: 30px;
 }
 
 .card {
@@ -40,7 +34,7 @@
   border-radius: 12px;
   padding: 30px;
   width: 350px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   border: 1px solid #eee;
@@ -48,8 +42,8 @@
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-  border-color: #3498db; /* Arch Blue */
+  box-shadow: 0 15px 40px rgba(52, 152, 219, 0.67);
+  border-color: #3498db;
 }
 
 .icon { font-size: 3rem; margin-bottom: 20px; }
@@ -58,3 +52,17 @@ p { color: #7f8c8d; line-height: 1.6; margin-bottom: 25px; }
 
 .btn-primary { background: #3498db; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; }
 .btn-secondary { background: #2ecc71; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; }
+.card.compare{
+transform: rotate(-5deg) translateX(-20px);
+}
+.card.compare:hover{
+  transform: translateY(-30px) rotate(-5deg) translateX(-20px);
+}
+.card.vis{
+  transform: rotate(5deg) translateX(20px);
+}
+.card.vis:hover{
+  transform: translateY(-30px) rotate(5deg) translateX(20px);
+  box-shadow: 0 15px 40px rgba(46, 204, 113, 0.66);
+  border-color: #2ecc71;
+}

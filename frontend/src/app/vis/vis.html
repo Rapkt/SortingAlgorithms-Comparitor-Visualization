@@ -1,1 +1,85 @@
-<p>vis works!</p>
+<div class="vis-page-container">
+  <button class="back-btn btn-close" routerLink="/home" >Home</button>
+  <section class="algo-selection">
+    <h1 class="section-title">Choose Your Algorithm</h1>
+    <div class="carousel-track">
+      <app-cards
+        *ngFor="let algo of algorithmList"
+        [imageUrl]="algo.imageUrl"
+        [description]="algo.description"
+        [complexity]="algo.complexity"
+        [isSelected]="algoId === algo.id"
+        (selected)="selectAlgo(algo.id)"
+        [name]="algo.name"
+      class="theater-card-item">
+      </app-cards>
+    </div>
+  </section>
+
+  <div class="reveal-container" *ngIf="algoId" id="lab-settings">
+    <section class="lab-controls">
+      <hr class="divider">
+      <h2 class="section-title">Initialize {{algoId}} Sort</h2>
+
+      <div class="controls-grid">
+        <div class="control-panel">
+          <h3>Generate Data</h3>
+          <div class="input-row">
+            <input type="number" max="100" min="1" [(ngModel)]="arraySize" placeholder="Size (10-100)">
+            <select [(ngModel)]="arrayType">
+              <option value="Random">Random</option>
+              <option value="Sorted">Sorted</option>
+              <option value="Inverted">Reversed</option>
+            </select>
+          </div>
+          <button class="action-btn gen" (click)="initializetheater(algoId, arrayType, arraySize, [])">
+            Build Stage
+          </button>
+        </div>
+
+        <div class="separator">OR</div>
+
+        <div class="control-panel">
+          <h3>Custom Dataset</h3>
+          <div class="upload-zone">
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".txt" hidden>
+            <label for="fileInput" class="upload-label">
+              <span class="icon">📁</span>
+              <span>Upload .txt file</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="theater-stage" *ngIf="data.length > 0">
+      <div class="theater-card">
+        <div #visualizerContainer class="svg-container"></div>
+
+        <div class="theater-footer">
+          <div class="stats" *ngIf="currentStep">
+            <div class="stat"><span>Comparisons:</span> <strong>{{currentStep.comparisons}}</strong></div>
+            <div class="stat"><span>Swaps:</span> <strong>{{currentStep.interchanges}}</strong></div>
+          </div>
+
+          <div class="playback-btns">
+            <button class="play-btn" (click)="startAnimation()" [disabled]="animationActive">
+              <ng-container *ngIf="!animationActive">
+                <span>▶ Play</span>
+              </ng-container>
+              <ng-container *ngIf="animationActive">
+                <span>Sorting...</span>
+              </ng-container>
+            </button>
+            <button class="reset-btn" (click)="resetTheater()">↺ Reset</button>
+          </div>
+
+          <div class="speed-control">
+            <label>Speed: {{animationSpeed}}ms</label>
+            <input type="range" min="1" max="1000" [(ngModel)]="animationSpeed">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

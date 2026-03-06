@@ -1,7 +1,7 @@
 :host {
   display: block;
   width: 250px;
-  height: 350px;/* Ensures the component respects dimensions */
+  height: 350px;
 }
 
 .card-wrapper {
@@ -33,7 +33,7 @@
 }
 
 .card-wrapper.selected {
-  transform:translateY(-20px) scale(1.08);
+  transform:translateY(-20px) scale(1.02);
   border-color: #3498db;
   box-shadow: 0 15px 30px rgba(52,152,219,0.3);
   z-index: 10;

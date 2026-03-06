@@ -3,7 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SortStats } from '../Models/SortStats';
 import{Steps} from "../Models/Steps";
-
+export interface Vis {
+  algoId:string;
+  size:number;
+  type:string;
+}
 export interface BenchmarkRequest {
   algoIdA: string;
   algoIdB: string;
@@ -36,6 +40,20 @@ export class SortService {
     const params = new HttpParams()
       .set('page', page.toString())
     .set('end', pageSize.toString());
-    return this.http.post<Steps[]>(`${this.URL}/steps`, null, { params });
+    return this.http.get<Steps[]>(`${this.URL}/steps`, { params });
+  }
+
+  startVis(algoId:string,type:string,size:number,arr:number[]):Observable<number[]> | null {
+    const payload={
+      algoId:algoId,
+      size:size,
+      type:type,
+      arr:arr
+    }
+    return this.http.post<number[]>(`${this.URL}/startVis`, payload);
+  }
+
+  triggerTheater(algoId:string):Observable<number[]> {
+    return this.http.post<number[]>(`${this.URL}/startTheater?algoId=${algoId}`,{});
   }
 }

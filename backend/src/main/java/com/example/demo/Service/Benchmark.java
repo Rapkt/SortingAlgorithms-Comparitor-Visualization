@@ -46,12 +46,13 @@ public class Benchmark {
         res.setTotalSteps(finalSteps.size());
         return res;
     }
-   /* public respond BenchWithArray(List<Integer> arr,String algo,String arrayType,int size ){
-        long finalComparisons=0;
-        long finalinterchanges=0;
-        List<steps> finalSteps = new ArrayList<>();
 
-        InstrumentedList<Integer> list = new InstrumentedList<>(arr);
+
+    public respond SortWithArr(List<Integer> arr,String algo){
+        List<steps> finalSteps = new ArrayList<>();
+        double finalComparisons=0;
+        double finalinterchanges=0;
+        InstrumentedList<Integer> list =new InstrumentedList<>(arr);
         Engine engine = getEngine(algo);
         long startTime = System.nanoTime();
         engine.Sorted(list);
@@ -63,8 +64,13 @@ public class Benchmark {
         finalinterchanges = list.getInterchanges();
         finalSteps = list.getSortingSteps();
         respond res = new respond();
-
-    }*/
+        System.out.println(finalComparisons);
+        res.setSteps(finalSteps);
+        res.setTotalInterchanges(finalinterchanges);
+        res.setTotalComparisons(finalComparisons);
+        res.setAverageRuntime(duration);
+        return res;
+    }
         private Engine getEngine(String name){
             switch (name.toLowerCase()) {
                 case "bubble":
