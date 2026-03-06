@@ -118,11 +118,7 @@ This will:
 * Aggregate statistical metrics
 * Generate a high-resolution graph:
 
-```
-<img width="845" height="529" alt="output" src="https://github.com/user-attachments/assets/3de6620c-785a-40cf-8655-b908372ea18d" />
-
-
-```
+<img width="845" height="529" alt="output" src="https://github.com/user-attachments/assets/3e6d4bc7-2c4a-4aa1-b669-7eef9a324f72" />
 
 ---
 
