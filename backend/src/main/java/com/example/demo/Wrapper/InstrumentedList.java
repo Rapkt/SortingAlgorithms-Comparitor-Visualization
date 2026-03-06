@@ -34,6 +34,10 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     }
     @Override
     public T set(int index, T element) {
+        if(internalList.size()<=100){
+            internalList.set(index,element);
+            captureStep();
+        }
         return internalList.set(index, element);
     }
     public void setWithCapture(int index, T element) {
@@ -51,7 +55,7 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
         T temp = internalList.get(idxA);
         internalList.set(idxA, internalList.get(idxB));
         internalList.set(idxB, temp);
-        interchanges++;
+        this.interchanges++;
         this.i = idxA;
         this.j = idxB;
 
@@ -60,7 +64,7 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
         }
 
     }
-    private void captureStep(){
+    public void captureStep(){
         sortingSteps.add(new steps(
                 new ArrayList<>((List<Integer>) internalList),
                 this.comparisons,
@@ -75,16 +79,26 @@ public class InstrumentedList<T extends Comparable<T>> extends AbstractList<T> {
     public List<steps> getSortingSteps(){
         return sortingSteps;
     }
+
     public int compare(int indexA,int indexB){
-        comparisons++;
+        this.comparisons++;
+        if(internalList.size()<=100){
+            captureStep();
+        }
         return internalList.get(indexA).compareTo(internalList.get(indexB));
     }
     public int compareValue(T value,int index){
         comparisons++;
+        if(internalList.size()<=100){
+            captureStep();
+        }
         return value.compareTo(internalList.get(index));
     }
     public int compareValues(T value1, T value2) {
         comparisons++;
+        if(internalList.size()<=100){
+            captureStep();
+        }
         return value1.compareTo(value2);
     }
 

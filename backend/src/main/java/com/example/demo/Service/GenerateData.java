@@ -29,19 +29,17 @@ public class GenerateData {
     }
     private List<Integer> Sorted(int numberOfElements){
         List<Integer> res = new ArrayList<>(numberOfElements);
-        int start = randomint.nextInt(10000);
-
-        for(int i= 0;i<numberOfElements;i++){
-            res.add(start+i );
+        int gap = randomint.nextInt(200);
+        for(int i= 1;i<numberOfElements;i++){
+            res.add(i* gap);
         }
         return res;
     }
     private List<Integer> Reverse(int numberOfElements){
         List<Integer> res = new ArrayList<>(numberOfElements);
-        int start = randomint.nextInt(10000);
-
-        for(int i= 0;i<numberOfElements;i++){
-            res.add(start-i );
+        int gap = randomint.nextInt(200);
+        for(int i= numberOfElements;i>=0;i--){
+            res.add(i*gap);
         }
         return res;
     }

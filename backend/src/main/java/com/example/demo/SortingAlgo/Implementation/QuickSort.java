@@ -24,17 +24,11 @@ public class QuickSort implements Engine {
             if(numbers.compareValue(pivot,j) >0){
                 i++;
                 numbers.swap(i,j);
-                /*int temp = numbers.get(i);
-                numbers.set(i,numbers.get(j));
-                numbers.set(j,temp);*/
             }
             j++;
         }
         i++;
         numbers.swap(i,j);
-        /*int temp = numbers.get(i);
-        numbers.set(i,numbers.get(j));
-        numbers.set(j,temp);*/
 
         quick(numbers,start,i-1);
         quick(numbers,i+1,end);

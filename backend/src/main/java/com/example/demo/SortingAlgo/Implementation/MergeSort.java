@@ -11,52 +11,38 @@ public class MergeSort implements Engine {
 
     @Override
     public List<Integer> Sorted(InstrumentedList<Integer> numbers) {
-        mergeSort(numbers,0,0);
+        mergeSort(numbers,0,numbers.size()-1);
+        numbers.captureStep();
         return numbers;
     }
-    private void mergeSort(InstrumentedList<Integer> numbers,int level,int offset){
-        int length = numbers.size();
-        if(length <=1) return;
-
-        int middle = length/2;
-
-        InstrumentedList<Integer> Left = new InstrumentedList<>(
-                new ArrayList<>(numbers.subList(0,middle)),
-                numbers.getSortingSteps(),
-                offset,
-                level+1);
-        InstrumentedList<Integer> Right = new InstrumentedList<>(
-                new ArrayList<>(numbers.subList(middle,length)),
-                numbers.getSortingSteps(),
-                offset+middle,
-                level+1);
-
-        mergeSort(Left,level+1,offset);
-        mergeSort(Right,level+1,offset+middle);
-        merge(Left,Right,numbers);
-
+    private void mergeSort(InstrumentedList<Integer> numbers,int left,int right){
+        if(left < right) {
+            int mid = left + (right - left)/2;
+            mergeSort(numbers,left,mid);
+            mergeSort(numbers,mid+1,right);
+            merge(numbers,left,mid,right);
+        }
     }
-    private void merge (InstrumentedList<Integer> Left,InstrumentedList<Integer> Right,InstrumentedList<Integer> parent){
-        int rightIdx =0;
-        int leftIdx =0;
-        for(int i=0;i <parent.size();i++){
-            if(rightIdx < Right.size()  && leftIdx < Left.size()){
-                if(parent.compareValues(Left.get(leftIdx), Right.get(rightIdx)) <0){
-                    parent.setWithCapture(i,Left.get(leftIdx));
-                    leftIdx++;
-                }
-                else{
-                    parent.setWithCapture(i,Right.get(rightIdx));
-                    rightIdx++;
-                }
-            } else if (rightIdx < Right.size()) {
-                parent.setWithCapture(i,Right.get(rightIdx));
-                rightIdx++;
+    private void merge (InstrumentedList<Integer> numbers,int left,int mid,int right){
+        List<Integer> temp =  new ArrayList<>();
+        int i=left;
+        int j = mid+1;
+        while(i <= mid && j<=right){
+            if(numbers.compare(i,j) <=0){
+                temp.add(numbers.get(i++));
             }
             else{
-                parent.setWithCapture(i,Left.get(leftIdx));
-                leftIdx++;
+                temp.add(numbers.get(j++));
             }
+        }
+        while(i <=mid){
+            temp.add(numbers.get(i++));
+        }
+        while(j <=right){
+            temp.add(numbers.get(j++));
+        }
+        for(int k=0;k<temp.size();k++){
+            numbers.set(left+k,temp.get(k));
         }
     }
 }
